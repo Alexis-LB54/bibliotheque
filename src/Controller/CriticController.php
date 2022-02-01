@@ -70,8 +70,8 @@ class CriticController
     {
         $em = EntityManagerHelper::getEntityManager();
 
-        $repositoryCritic = new EntityRepository($em, new ClassMetadata("App\Entity\Critic"));
-        $Critic = $repositoryCritic->find($id);
+        $repoCritic = new EntityRepository($em, new ClassMetadata("App\Entity\Critic"));
+        $Critic = $repoCritic->find($id);
 
         var_dump($Critic);
         die();
@@ -98,7 +98,7 @@ class CriticController
             die();
         }
 
-        $Critic->setBook((int)$_POST["Book"]);
+        $Critic->getBook((int)$_POST["Book"]);
         $Critic->setNote((int)$_POST["note"]);
         $Critic->setComment($_POST["Comment"]);
         $em->persist($Critic);

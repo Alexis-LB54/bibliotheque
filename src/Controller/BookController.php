@@ -118,29 +118,27 @@ class BookController
         $repositoryBook = new EntityRepository($em, new ClassMetadata("App\Entity\Book"));
         $Book = $repositoryBook->find($id);
 
-        // var_dump($Book);
-        // die();
-
+        
         if (!empty($_POST)) {
             foreach (self::BOOK as $value) {
                 $existe = array_key_exists($value, $_POST);
                 if ($existe === false) {
                     echo "erreur";
-                    include(__DIR__ . "/../Vues/Book/deletteBook.php");
+                    include(__DIR__ . "/../Vues/Book/deleteBook.php");
                     die();
                 }
             }
         }
-
+        
         $_POST[$value] = trim(htmlentities(strip_tags($_POST[$value])));
-
-
+        
+        
         if ($_POST[$values] === "") {
             echo "Champs $value vide";
-            include(__DIR__ . "/../Vues/Book/deletteBook.php");
+            include(__DIR__ . "/../Vues/Book/deleteBook.php");
             die();
         }
-
+        
         $em->remove($Book);
         $em->flush();
     }

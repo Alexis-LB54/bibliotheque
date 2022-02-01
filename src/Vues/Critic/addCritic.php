@@ -15,7 +15,7 @@
         <input name="Book" type="text" value="<?php echo $Critic->getTitle() ?>" required />
 
         <label for="note">note:</label>
-        <input name="note" type="number" required />
+        <input name="note" type="number" max="5" required />
 
         <label for="Comment">Comment:</label>
         <input name="Comment" type="textarea" required />
