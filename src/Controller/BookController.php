@@ -13,6 +13,15 @@ class BookController
         "title", "resume", "author", "editor", "ISBN", "stock", "borrow"
     ];
 
+    public function show()
+    {
+        $em = EntityManagerHelper::getEntityManager();
+        $repositoryBook = new EntityRepository($em, new ClassMetadata("App\Entity\Book"));
+        $Book = $repositoryBook->findAll();
+
+        include (__DIR__."/../Vues/Book/showBook.php");
+    }
+
     public function add()
     {
         $em = EntityManagerHelper::getEntityManager();

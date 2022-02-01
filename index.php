@@ -20,6 +20,9 @@ $router->post("/BookM/:id", "App\Controller\BookController@modify");
 $router->get("/BookD/:id", "App\Controller\BookController@delete");
 $router->post("/BookD/:id", "App\Controller\BookController@delete");
 
+$router->get("/BookS", "App\Controller\BookController@show");
+$router->post("/BookS", "App\Controller\BookController@show");
+
 $router->get("/CriticA/:id", "App\Controller\CriticController@add");
 $router->post("/CriticA/:id", "App\Controller\CriticController@add");
 
