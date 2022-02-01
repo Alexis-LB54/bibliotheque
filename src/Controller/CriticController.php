@@ -13,6 +13,15 @@ class CriticController
         "Book", "note", "Comment"
     ];
 
+    function show()
+    {
+        $em = EntityManagerHelper::getEntityManager();
+        $repositoryCritic = new EntityRepository($em, new ClassMetadata("App\Entity\Critic"));
+        $Critic = $repositoryCritic->findAll();
+
+        include (__DIR__."/../Vues/Critic/showCritic.php");
+    }
+
     public function add(string $id)
     {
         $em = EntityManagerHelper::getEntityManager();

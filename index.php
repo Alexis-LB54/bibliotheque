@@ -32,4 +32,7 @@ $router->post("/CriticM/:id", "App\Controller\CriticController@modify");
 $router->get("/CriticD/:id", "App\Controller\CriticController@delete");
 $router->post("/CriticD/:id", "App\Controller\CriticController@delete");
 
+$router->get("/CriticS", "App\Controller\CriticController@show");
+$router->post("/CriticS", "App\Controller\CriticController@show");
+
 $router->run();
