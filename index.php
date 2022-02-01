@@ -11,4 +11,6 @@ $router = new Router($_GET['url']);
 
 $router->get("/", "App\Controller\AppController@index");
 
+$router;
+
 $router->run();
