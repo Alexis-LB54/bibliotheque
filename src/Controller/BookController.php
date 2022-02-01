@@ -33,7 +33,7 @@ class BookController
 
             $_POST[$value] = trim(htmlentities(strip_tags($_POST[$value])));
 
-            
+
             if ($_POST[$value] === "") {
                 $error = "Le Champs est vide";
                 include(__DIR__ . "/../Vues/Book/addBook.php");
@@ -41,7 +41,8 @@ class BookController
                 exit;
             }
         }
-        
+
+
         $BookTitle = $_POST["title"];
         $BookResume = $_POST["resume"];
         $BookAuthor = $_POST["author"];
@@ -50,11 +51,8 @@ class BookController
         $BookStock = (int)$_POST["stock"];
         $BookBorrow = (int)$_POST["borrow"];
 
-        // var_dump($BookISBN);
-        // die();
 
         $NewBook = new Book($BookTitle, $BookResume, $BookAuthor, $BookEditor, $BookISBN, $BookStock, $BookBorrow);
-        //var_dump($NewBook);
         $em->persist($NewBook);
         $em->flush();
 
@@ -65,37 +63,76 @@ class BookController
     {
         $em = EntityManagerHelper::getEntityManager();
 
-        $repositoryArticle = new EntityRepository($em, new ClassMetadata("App\Entity\Book"));
-        $Article = $repositoryArticle->find($id);
+        $repositoryBook = new EntityRepository($em, new ClassMetadata("App\Entity\Book"));
+        $Book = $repositoryBook->find($id);
+
 
         if (!empty($_POST)) {
             foreach (self::BOOK as $value) {
                 $existe = array_key_exists($value, $_POST);
                 if ($existe === false) {
                     echo "erreur";
-                    include(__DIR__ . "/../Vues/manager/modifyArticle.php");
-                    die();
-                }
-
-                $_POST[$value] = trim(htmlentities(strip_tags($_POST[$value])));
-                if ($_POST[$values] === "") {
-                    echo "Champs $value vide";
-                    include(__DIR__ . "/../Vues/manager/modifyArticle.php");
+                    include(__DIR__ . "/../Vues/Book/modifyBook.php");
                     die();
                 }
             }
         }
 
-        $Article->setTitle($_POST["Title"]);
-        $Article->setResume($_POST["resume"]);
-        $Article->setAuthor($_POST["author"]);
-        $Article->setEditor($_POST["editor"]);
-        $Article->setISBN($_POST["ISBN"]);
-        $Article->setNote($_POST["note"]);
-        $Article->setComment($_POST["Comment"]);
-        $em->persist($Article);
+        $_POST[$value] = trim(htmlentities(strip_tags($_POST[$value])));
+
+        // var_dump($_POST[$value]);
+        // die();
+
+        if ($_POST[$values] === "") {
+            echo "Champs $value vide";
+            include(__DIR__ . "/../Vues/Book/modifyBook.php");
+            die();
+        }
+
+        $Book->setTitle($_POST["title"]);
+        $Book->setResume($_POST["resume"]);
+        $Book->setAuthor($_POST["author"]);
+        $Book->setEditor($_POST["editor"]);
+        $Book->setISBN((int)$_POST["ISBN"]);
+        $Book->setStock_number((int)$_POST["stock"]);
+        $Book->setBorrow_number((int)$_POST["borrow"]);
+        $em->persist($Book);
         $em->flush();
 
         include(__DIR__ . "/../Vues/manager/modifyArticle.php");
+    }
+
+    public function delete($id)
+    {
+        $em = EntityManagerHelper::getEntityManager();
+
+        $repositoryBook = new EntityRepository($em, new ClassMetadata("App\Entity\Book"));
+        $Book = $repositoryBook->find($id);
+
+        // var_dump($Book);
+        // die();
+
+        if (!empty($_POST)) {
+            foreach (self::BOOK as $value) {
+                $existe = array_key_exists($value, $_POST);
+                if ($existe === false) {
+                    echo "erreur";
+                    include(__DIR__ . "/../Vues/Book/deletteBook.php");
+                    die();
+                }
+            }
+        }
+
+        $_POST[$value] = trim(htmlentities(strip_tags($_POST[$value])));
+
+
+        if ($_POST[$values] === "") {
+            echo "Champs $value vide";
+            include(__DIR__ . "/../Vues/Book/deletteBook.php");
+            die();
+        }
+
+        $em->remove($Book);
+        $em->flush();
     }
 }

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modify Book</title>
+    <title>Delete Book</title>
 </head>
 <body>
-<form method="POST" action=<?="http://127.0.0.1/bibliotheque/BookM/$id"?>>
+<form method="POST" action=<?="http://127.0.0.1/bibliotheque/BookD/$id"?>>
         <label for="title">Title:</label>
         <input name="title" type="text" value="<?php echo $Book->getTitle() ?>" required />
 
@@ -29,7 +29,7 @@
         <label for="borrow">borrow:</label>
         <input name="borrow" type="number" value="<?php echo $Book->getBorrow_number() ?>" required />
 
-        <input type="submit" value="Modify" />
+        <input type="submit" value="DELETE" />
 </form>
 </body>
 </html>
