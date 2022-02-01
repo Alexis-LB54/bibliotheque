@@ -141,5 +141,8 @@ class BookController
         
         $em->remove($Book);
         $em->flush();
+
+        include(__DIR__ . "/../Vues/Book/deleteBook.php");
+
     }
 }

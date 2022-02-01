@@ -139,5 +139,7 @@ class CriticController
 
         $em->remove($Critic);
         $em->flush();
+
+        include(__DIR__ . "/../Vues/Critic/deleteCritic.php");
     }
 }
