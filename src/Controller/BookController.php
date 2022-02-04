@@ -19,7 +19,10 @@ class BookController
         $repositoryBook = new EntityRepository($em, new ClassMetadata("App\Entity\Book"));
         $Book = $repositoryBook->findAll();
 
-        include (__DIR__."/../Vues/Book/showBook.php");
+        include(__DIR__ . "/../Vues/Book/showBook.php");
+
+        // include(__DIR__ . "/../Vues/Book/showtest.php");
+        
     }
 
     public function add()
@@ -27,7 +30,8 @@ class BookController
         $em = EntityManagerHelper::getEntityManager();
 
         if (empty($_POST)) {
-            include(__DIR__ . "/../Vues/Book/addBook.php");
+            // include(__DIR__ . "/../Vues/Book/addBook.php");
+            include(__DIR__ . "/../Vues/Book/addBooktest.php");
             die();
         }
 
@@ -35,7 +39,8 @@ class BookController
 
             if (!array_key_exists($value, $_POST)) {
                 $error = "Le Champs est vide";
-                include(__DIR__ . "/../Vues/Book/addBook.php");
+                // include(__DIR__ . "/../Vues/Book/addBook.php");
+                include(__DIR__ . "/../Vues/Book/addBooktest.php");
                 echo $error;
                 exit;
             }
@@ -45,7 +50,8 @@ class BookController
 
             if ($_POST[$value] === "") {
                 $error = "Le Champs est vide";
-                include(__DIR__ . "/../Vues/Book/addBook.php");
+                // include(__DIR__ . "/../Vues/Book/addBook.php");
+                include(__DIR__ . "/../Vues/Book/addBooktest.php");
                 echo $error;
                 exit;
             }
@@ -65,7 +71,8 @@ class BookController
         $em->persist($NewBook);
         $em->flush();
 
-        include(__DIR__ . "/../Vues/Book/addBook.php");
+        // include(__DIR__ . "/../Vues/Book/addBook.php");
+        include(__DIR__ . "/../Vues/Book/addBooktest.php");
     }
 
     public function modify(string $id)
@@ -118,7 +125,7 @@ class BookController
         $repositoryBook = new EntityRepository($em, new ClassMetadata("App\Entity\Book"));
         $Book = $repositoryBook->find($id);
 
-        
+
         if (!empty($_POST)) {
             foreach (self::BOOK as $value) {
                 $existe = array_key_exists($value, $_POST);
@@ -129,20 +136,19 @@ class BookController
                 }
             }
         }
-        
+
         $_POST[$value] = trim(htmlentities(strip_tags($_POST[$value])));
-        
-        
+
+
         if ($_POST[$values] === "") {
             echo "Champs $value vide";
             include(__DIR__ . "/../Vues/Book/deleteBook.php");
             die();
         }
-        
+
         $em->remove($Book);
         $em->flush();
 
         include(__DIR__ . "/../Vues/Book/deleteBook.php");
-
     }
 }
